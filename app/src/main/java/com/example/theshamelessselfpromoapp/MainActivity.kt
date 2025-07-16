@@ -1,5 +1,6 @@
 package com.example.theshamelessselfpromoapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
@@ -40,9 +41,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onPreviewClick() {
-        val testString =
-            contactNameEditText?.text?.toString() + ", " + contactNumberEditText?.text?.toString()
+        val contactName = contactNameEditText?.text?.toString()
+        val contactNumber = contactNumberEditText?.text?.toString()
+        val myDisplayName = myDisplayNameEditText?.text.toString()
+        val includeJunior = juniorCheckBox?.isChecked
+        val jobTitle = jobTitleSpinner?.selectedItem.toString()
+        val immediateStart = immediateStartCheckBox?.isChecked
+        val startDate = startDateEditText?.text.toString()
 
-        Toast.makeText(this, testString, Toast.LENGTH_LONG).show()
+        val previewActivityIntent = Intent(this, PreviewActivity::class.java)
+
+        previewActivityIntent.putExtra("Contact Name", contactName)
+        previewActivityIntent.putExtra("Contact Number", contactNumber)
+        previewActivityIntent.putExtra("Display Name", myDisplayName)
+        previewActivityIntent.putExtra("Include Junior", includeJunior)
+        previewActivityIntent.putExtra("Job Title",jobTitle)
+        previewActivityIntent.putExtra("Immediate Start", immediateStart)
+        previewActivityIntent.putExtra("Start Date", startDate)
+
+        startActivity(previewActivityIntent)
     }
 }
