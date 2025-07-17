@@ -14,14 +14,14 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.textfield.TextInputEditText
 
 class MainActivity : AppCompatActivity() {
-    private var contactNameEditText: TextInputEditText? = null
-    private var contactNumberEditText: TextInputEditText? = null
-    private var myDisplayNameEditText: TextInputEditText? = null
-    private var startDateEditText: TextInputEditText? = null
-    private var juniorCheckBox: CheckBox? = null
-    private var immediateStartCheckBox: CheckBox? = null
-    private var jobTitleSpinner: Spinner? = null
-    private var previewButton: Button? = null
+    lateinit private var contactNameEditText: TextInputEditText
+    lateinit private var contactNumberEditText: TextInputEditText
+    lateinit private var myDisplayNameEditText: TextInputEditText
+    lateinit private var startDateEditText: TextInputEditText
+    lateinit private var juniorCheckBox: CheckBox
+    lateinit private var immediateStartCheckBox: CheckBox
+    lateinit private var jobTitleSpinner: Spinner
+    lateinit private var previewButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,35 +36,40 @@ class MainActivity : AppCompatActivity() {
         jobTitleSpinner = findViewById(R.id.spinner_job_title)
 
         previewButton = findViewById(R.id.button_preview)
-        previewButton?.setOnClickListener {
+        previewButton.setOnClickListener {
             onPreviewClick()
         }
 
         val spinnerValues: Array<String> = arrayOf("Android Developer", "Android Engineer")
 
-        val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, spinnerValues)
+        val spinnerAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, spinnerValues)
 
         jobTitleSpinner?.adapter = spinnerAdapter
     }
 
     private fun onPreviewClick() {
-        val contactName = contactNameEditText?.text?.toString()
-        val contactNumber = contactNumberEditText?.text?.toString()
-        val myDisplayName = myDisplayNameEditText?.text.toString()
-        val includeJunior = juniorCheckBox?.isChecked
-        val jobTitle = jobTitleSpinner?.selectedItem.toString()
-        val immediateStart = immediateStartCheckBox?.isChecked
-        val startDate = startDateEditText?.text.toString()
+
+        val message = Message(
+                contactNameEditText.text.toString(),
+                contactNumberEditText.text.toString(),
+                myDisplayNameEditText.text.toString(),
+                juniorCheckBox.isChecked,
+                jobTitleSpinner.selectedItem.toString(),
+                immediateStartCheckBox.isChecked,
+                startDateEditText.text.toString(),
+
+                )
 
         val previewActivityIntent = Intent(this, PreviewActivity::class.java)
 
-        previewActivityIntent.putExtra("Contact Name", contactName)
-        previewActivityIntent.putExtra("Contact Number", contactNumber)
-        previewActivityIntent.putExtra("Display Name", myDisplayName)
-        previewActivityIntent.putExtra("Include Junior", includeJunior)
-        previewActivityIntent.putExtra("Job Title", jobTitle)
-        previewActivityIntent.putExtra("Immediate Start", immediateStart)
-        previewActivityIntent.putExtra("Start Date", startDate)
+        previewActivityIntent.putExtra("Contact Name", message.contactName)
+        previewActivityIntent.putExtra("Contact Number", message.contactNumber)
+        previewActivityIntent.putExtra("Display Name", message.myDisplayName)
+        previewActivityIntent.putExtra("Include Junior", message.includeJunior)
+        previewActivityIntent.putExtra("Job Title", message.jobTitle)
+        previewActivityIntent.putExtra("Immediate Start", message.immediateStart)
+        previewActivityIntent.putExtra("Start Date", message.startDate)
 
         startActivity(previewActivityIntent)
     }
