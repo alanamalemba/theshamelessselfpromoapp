@@ -2,6 +2,7 @@ package com.example.theshamelessselfpromoapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Spinner
@@ -38,6 +39,12 @@ class MainActivity : AppCompatActivity() {
         previewButton?.setOnClickListener {
             onPreviewClick()
         }
+
+        val spinnerValues: Array<String> = arrayOf("Android Developer", "Android Engineer")
+
+        val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, spinnerValues)
+
+        jobTitleSpinner?.adapter = spinnerAdapter
     }
 
     private fun onPreviewClick() {
@@ -55,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         previewActivityIntent.putExtra("Contact Number", contactNumber)
         previewActivityIntent.putExtra("Display Name", myDisplayName)
         previewActivityIntent.putExtra("Include Junior", includeJunior)
-        previewActivityIntent.putExtra("Job Title",jobTitle)
+        previewActivityIntent.putExtra("Job Title", jobTitle)
         previewActivityIntent.putExtra("Immediate Start", immediateStart)
         previewActivityIntent.putExtra("Start Date", startDate)
 
