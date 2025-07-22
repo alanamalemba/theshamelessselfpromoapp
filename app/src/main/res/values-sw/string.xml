@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Programu ya Kujitangaza Bila Aibu</string>
+    <string name="hint_contact_name">Jina la Mwasiliani</string>
+    <string name="hint_contact_number">Nambari ya Mwasiliani</string>
+    <string name="hint_my_display_name">Jina langu la kuonekana</string>
+    <string name="hint_include_junior">Jumuisha junior</string>
+    <string name="text_immediate_start">Anza mara moja</string>
+    <string name="hint_available_from_the_date">Inapatikana kuanzia tarehe</string>
+    <string name="text_preview_message">Onyesha ujumbe </string>
+    <string name="text_send_message">Tuma ujumbe</string>
+</resources>
